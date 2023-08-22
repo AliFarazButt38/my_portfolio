@@ -491,7 +491,7 @@ class _HomePageState extends State<HomePage> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'About',
+                          'About Me',
                           style: TextStyle(
                             fontSize: 40.0,
                             color: kContrastColor,
