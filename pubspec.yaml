@@ -1,5 +1,5 @@
-name: babar_ali_protfolio
-description: Babar Ali- Portfolio
+name: faraz_ahmad_protfolio
+description: Faraz Ahmad- Portfolio
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   animated_text_kit: ^4.2.2
   footer: ^0.0.4
+  url_launcher: ^6.1.14
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:

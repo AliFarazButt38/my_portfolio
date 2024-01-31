@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:footer/footer.dart';
 import 'constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'helpers/projects_details_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +14,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController messageTextEditingController = TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
+  int showcaseNumber = 1;
+
+  void launchUpworkUrl() async {
+    final Uri url = Uri.parse('https://www.upwork.com/freelancers/~01e32e5f2fbba79b12');
+    bool isLaunched = await launchUrl(url);
+    if (!isLaunched) {
+      throw Exception('Couldn\'t Launch the $url successfully');
+    }
+  }
+
+  SnackBar giveCustomSnackBar({required String message}) {
+    return SnackBar(
+      content: Center(
+        child: Text(
+          message,
+          style: const TextStyle(
+            color: kPrimaryColor,
+            fontSize: 18.0,
+          ),
+        ),
+      ),
+      backgroundColor: kContrastColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(15.0),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             title: const Row(
               children: [
                 Expanded(
-                  child: Text('BABAR ALI'),
+                  child: Text('Faraz Ahmad'),
                 ),
                 Expanded(
                   child: TabBar(
@@ -137,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                                   totalRepeatCount: 1,
                                   animatedTexts: [
                                     TypewriterAnimatedText(
-                                      'I craft Apps for mobile and web...',
+                                      'I craft Apps for ios and android...',
                                       textStyle: const TextStyle(
                                         color: kContrastColor,
                                         fontSize: 50.0,
@@ -150,8 +185,8 @@ class _HomePageState extends State<HomePage> {
                                   height: 10.0,
                                 ),
                                 const Text(
-                                  'I have 2+ years of Experience in Hybrid Apps Development. '
-                                  'Before switching to cross-platform, I\'ve coded in Native as well.',
+                                  'I have 1+ year of Experience in Hybrid Apps Development. '
+                                  'i am making cross-platform applications for more then 1 year',
                                   style: TextStyle(
                                     color: kContrastColor,
                                     fontSize: 20.0,
@@ -164,16 +199,12 @@ class _HomePageState extends State<HomePage> {
                             flex: 2,
                             child: SizedBox(),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 3,
                             child: CircleAvatar(
                               radius: 150.0,
                               backgroundColor: kContrastColor,
-                              child: Icon(
-                                Icons.code,
-                                size: 200.0,
-                                color: kSecondaryColor,
-                              ),
+                              child: Image.asset("images/profile.jpg"),
                             ),
                           ),
                         ],
@@ -197,7 +228,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            onPressed: null,
+                            onPressed: () {
+                              launchUpworkUrl();
+                            },
                             child: const Text(
                               'Hire Now',
                               style: TextStyle(
@@ -208,30 +241,24 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(
                             width: 20.0,
                           ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  const MaterialStatePropertyAll(kPrimaryColor),
-                              foregroundColor: const MaterialStatePropertyAll(
-                                  kContrastColor),
-                              shape: MaterialStateProperty.all(
-                                const RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    color: kContrastColor,
-                                    width: 3.0,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(40.0),
-                                  ),
-                                ),
+                          const Tooltip(
+                            preferBelow: false,
+                            textStyle: TextStyle(
+                              color: kContrastColor,
+                              fontSize: 12.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: kPrimaryColor,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.0),
                               ),
                             ),
-                            onPressed: null,
-                            child: const Text(
-                              '?',
-                              style: TextStyle(
-                                fontSize: 50.0,
-                              ),
+                            message:
+                                'This will redirect you to my Upwork Freelance Account',
+                            child: Icon(
+                              Icons.question_mark,
+                              color: kContrastColor,
+                              size: 50.0,
                             ),
                           ),
                         ],
@@ -269,45 +296,45 @@ class _HomePageState extends State<HomePage> {
                             ClipRRect(
                               borderRadius: kShowcaseImageBorderRadius,
                               child: Image.asset(
-                                'images/showcase_1.jpg',
-                                fit: BoxFit.fill,
+                                'images/showcase_1.png',
+                                // fit: BoxFit.fill,
                               ),
                             ),
                             ClipRRect(
                               borderRadius: kShowcaseImageBorderRadius,
                               child: Image.asset(
-                                'images/showcase_2.jpg',
-                                fit: BoxFit.fill,
+                                'images/showcase_2.png',
+                                // fit: BoxFit.fill,
                               ),
                             ),
                             ClipRRect(
                               borderRadius: kShowcaseImageBorderRadius,
                               child: Image.asset(
-                                'images/showcase_3.jpg',
-                                fit: BoxFit.fill,
+                                'images/showcase_3.png',
+
                               ),
                             ),
-                            ClipRRect(
-                              borderRadius: kShowcaseImageBorderRadius,
-                              child: Image.asset(
-                                'images/showcase_4.jpg',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            ClipRRect(
-                              borderRadius: kShowcaseImageBorderRadius,
-                              child: Image.asset(
-                                'images/showcase_5.jpg',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            ClipRRect(
-                              borderRadius: kShowcaseImageBorderRadius,
-                              child: Image.asset(
-                                'images/showcase_6.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
+                            // ClipRRect(
+                            //   borderRadius: kShowcaseImageBorderRadius,
+                            //   child: Image.asset(
+                            //     'images/showcase_4.jpg',
+                            //     fit: BoxFit.fill,
+                            //   ),
+                            // ),
+                            // ClipRRect(
+                            //   borderRadius: kShowcaseImageBorderRadius,
+                            //   child: Image.asset(
+                            //     'images/showcase_5.jpg',
+                            //     fit: BoxFit.fill,
+                            //   ),
+                            // ),
+                            // ClipRRect(
+                            //   borderRadius: kShowcaseImageBorderRadius,
+                            //   child: Image.asset(
+                            //     'images/showcase_6.png',
+                            //     fit: BoxFit.fill,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -323,9 +350,27 @@ class _HomePageState extends State<HomePage> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Get in touch at: babar.pucit@gmail.com',
-                              style: TextStyle(color: kContrastColor),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Get in touch at farazUpwork38@gmail.com',
+                                  style: TextStyle(
+                                    color: kContrastColor,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  'Made with 🩵 using Flutter',
+                                  style: TextStyle(
+                                    color: kContrastColor,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ],
                             ),
                             //todo: make the assets load...
                             // Image.asset(
@@ -351,17 +396,16 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       Stack(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.topCenter,
                         children: [
                           ClipRRect(
                             borderRadius: const BorderRadius.all(
                               Radius.circular(15.0),
                             ),
                             child: Image.asset(
-                              'images/showcase_2.jpg',
+                              'images/showcase_$showcaseNumber.png',
                               height: 500.0,
-                              width: double.infinity,
-                              fit: BoxFit.fitWidth,
+
                             ),
                           ),
                           Padding(
@@ -369,10 +413,10 @@ class _HomePageState extends State<HomePage> {
                             child: AnimatedTextKit(
                               animatedTexts: [
                                 FlickerAnimatedText(
-                                  'SAB',
-                                  textStyle: const TextStyle(
+                                  projectsTitles[showcaseNumber - 1],
+                                  textStyle: TextStyle(
                                     fontSize: 90.0,
-                                    color: kSecondaryColor,
+                                    color: kSecondaryColor.withOpacity(0.5),
                                   ),
                                 ),
                               ],
@@ -381,7 +425,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       const SizedBox(
-                        height: 50.0,
+                        height: 30.0,
                       ),
                       Center(
                         child: AnimatedTextKit(
@@ -390,7 +434,7 @@ class _HomePageState extends State<HomePage> {
                             ColorizeAnimatedText(
                               'What\'s this?',
                               textStyle: const TextStyle(
-                                fontSize: 100.0,
+                                fontSize: 50.0,
                                 fontFamily: 'Horizon',
                               ),
                               colors: [
@@ -402,9 +446,9 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      const Text(
-                        'SAB(A Construction Company App)',
-                        style: TextStyle(
+                      Text(
+                        projectsShortDescriptions[showcaseNumber - 1],
+                        style: const TextStyle(
                           fontSize: 30.0,
                           color: kContrastColor,
                         ),
@@ -412,26 +456,40 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      const Text(
-                        'User can order any service and track the order from the company through the App.',
-                        style: TextStyle(
+                      Text(
+                        projectsDescriptions[showcaseNumber - 1],
+                        style: const TextStyle(
                           fontSize: 20.0,
                           color: kContrastColor,
                         ),
                       ),
                       const SizedBox(
-                        height: 30.0,
+                        height: 20.0,
                       ),
-                      IconButton.filledTonal(
-                        onPressed: () {},
-                        icon: const Icon(
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(kSecondaryColor),
+                        ),
+                        onPressed: () {
+                          if (showcaseNumber < 3) {
+                            setState(() {
+                              showcaseNumber++;
+                            });
+                          } else {
+                            setState(() {
+                              showcaseNumber = 1;
+                            });
+                          }
+                        },
+                        child: const Icon(
                           Icons.navigate_next,
-                          size: 130.0,
+                          size: 100.0,
                           color: kContrastColor,
                         ),
                       ),
                       const SizedBox(
-                        height: 150.0,
+                        height: 30.0,
                       ),
                       Container(
                         height: 100.0,
@@ -442,9 +500,27 @@ class _HomePageState extends State<HomePage> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Get in touch at: babar.pucit@gmail.com',
-                              style: TextStyle(color: kContrastColor),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Get in touch at farazUpwork38@gmail.com',
+                                  style: TextStyle(
+                                    color: kContrastColor,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  'Made with 🩵 using Flutter',
+                                  style: TextStyle(
+                                    color: kContrastColor,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ],
                             ),
                             //todo: make the assets load...
                             // Image.asset(
@@ -477,7 +553,7 @@ class _HomePageState extends State<HomePage> {
                           boxWidth: double.infinity,
                           boxBackgroundColor: kPrimaryColor,
                           waveColor: Colors.white,
-                          text: 'Fluttering since 2019',
+                          text: 'Fluttering since 2022',
                           textStyle: const TextStyle(
                             fontSize: 70.0,
                             fontWeight: FontWeight.w900,
@@ -521,7 +597,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             TextSpan(
                               text:
-                                  'I Switched to cross-platform app development at the end of 2019 and fall in love with Google\'s Flutter SDK.',
+                                  'I Switched to cross-platform app development at the end of 2022 and fall in love with Google\'s Flutter SDK.',
                             ),
                           ],
                         ),
@@ -571,7 +647,7 @@ class _HomePageState extends State<HomePage> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '2014  - 2018',
+                          '2018-2022',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: kContrastColorWithDecreasedOpacity,
@@ -584,7 +660,7 @@ class _HomePageState extends State<HomePage> {
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '(PUCIT, University of the Punjab)',
+                          '(UOG, University of Gujrat)',
                           style: TextStyle(
                             fontSize: 15.0,
                             color: kContrastColorWithDecreasedOpacity,
@@ -603,9 +679,27 @@ class _HomePageState extends State<HomePage> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Get in touch at: babar.pucit@gmail.com',
-                              style: TextStyle(color: kContrastColor),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Get in touch at farazUpwork38@gmail.com',
+                                  style: TextStyle(
+                                    color: kContrastColor,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                  'Made with 🩵 using Flutter',
+                                  style: TextStyle(
+                                    color: kContrastColor,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ],
                             ),
                             //todo: make the assets load...
                             // Image.asset(
@@ -640,14 +734,26 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 50.0,
                       ),
-                      const TextField(
+                      TextField(
+                        controller: messageTextEditingController,
+                        style: const TextStyle(
+                          color: kContrastColor,
+                        ),
                         maxLines: 15,
-                        decoration: kContactFormTextFieldInputDecoration,
+                        decoration:
+                            kContactFormTextFieldInputDecoration.copyWith(
+                          labelText: 'Message',
+                        ),
                       ),
                       const SizedBox(
                         height: 20.0,
                       ),
                       TextField(
+                        controller: emailTextEditingController,
+                        style: const TextStyle(
+                          color: kContrastColor,
+                          fontSize: 20.0,
+                        ),
                         decoration: kContactFormTextFieldInputDecoration
                             .copyWith(labelText: 'Your email'),
                       ),
@@ -668,7 +774,15 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            giveCustomSnackBar(
+                                message:
+                                    'Your message has been submitted. Thanks!'),
+                          );
+                          messageTextEditingController.clear();
+                          emailTextEditingController.clear();
+                        },
                         child: const Text(
                           'Submit',
                           style: TextStyle(
@@ -690,9 +804,27 @@ class _HomePageState extends State<HomePage> {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Get in touch at: babar.pucit@gmail.com',
-                                style: TextStyle(color: kContrastColor),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Get in touch at farazUpwork38@gmail.com',
+                                    style: TextStyle(
+                                      color: kContrastColor,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    'Made with 🩵 using Flutter',
+                                    style: TextStyle(
+                                      color: kContrastColor,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                ],
                               ),
                               //todo: make the assets load...
                               // Image.asset(
@@ -720,23 +852,7 @@ class _HomePageState extends State<HomePage> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Center(
-                    child: Text(
-                      'Chat Feature is in Pipeline',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                  backgroundColor: kContrastColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
-                    ),
-                  ),
-                ),
+                giveCustomSnackBar(message: 'Chat feature is in pipeline!'),
               );
             },
             backgroundColor: kContrastColor,
