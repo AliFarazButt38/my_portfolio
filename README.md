@@ -1,6 +1,6 @@
-# babar_ali_protfolio
+# Faraz_ahmad_protfolio
 
-Babar Ali- Portfolio
+Faraz Ahmad- Portfolio
 
 ## Getting Started
 
